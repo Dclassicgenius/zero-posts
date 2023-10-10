@@ -1,0 +1,79 @@
+$sizes: (
+  "xs": 375px,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+);
+
+@mixin media($minmax, $media) {
+  @each $size, $resolution in $sizes {
+    @if $media == $size {
+      @media only screen and (#{$minmax}-width: $resolution) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin btn {
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  color: var(--light);
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.Home {
+  margin: 2rem 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--dark);
+
+  .Heading {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .UserLogin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+
+    .Name {
+      font-size: 1.5rem;
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    .Logout {
+      @include btn;
+      background-color: red;
+    }
+  }
+
+  .Login {
+    @include btn;
+    background-color: var(--dark);
+    margin-bottom: 2rem;
+  }
+
+  .Grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2rem;
+
+    @include media("min", "md") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
